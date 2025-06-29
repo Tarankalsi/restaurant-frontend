@@ -89,8 +89,10 @@ const Footer: React.FC = () => {
               </Button>
             </form>
             <div className="flex space-x-3">
-              {['fa-cc-visa', 'fa-cc-mastercard', 'fa-cc-amex', 'fa-cc-paypal'].map((icon, index) => (
-                <Icon key={icon} name={icon} size="xl" className="text-gray-400" />
+              {['fa-cc-visa', 'fa-cc-mastercard', 'fa-cc-amex', 'fa-cc-paypal'].map((icon) => (
+                <span key={icon}>
+                  <Icon name={icon} className="text-2xl text-gray-400 hover:text-white transition-colors duration-300" />
+                </span>
               ))}
             </div>
           </FooterSection>
@@ -100,10 +102,10 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p>&copy; 2025 Saveur Restaurant. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((policy, index) => (
-                <a key={policy} href="#" className="hover:text-amber-500 cursor-pointer transition-colors duration-300">
+              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((policy) => (
+                <span key={policy} className="hover:text-white cursor-pointer transition-colors duration-300">
                   {policy}
-                </a>
+                </span>
               ))}
             </div>
           </div>
@@ -113,4 +115,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
