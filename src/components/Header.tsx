@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ContactInfo from './header/ContactInfo';
 import SocialLinks from './header/SocialLinks';
@@ -7,6 +7,8 @@ import Button from './common/Button';
 import Icon from './common/Icon';
 
 const Header: React.FC = () => {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
   return (
     <header className="bg-white shadow-sm fixed w-full z-50">
       <div className="container mx-auto px-4">
@@ -44,21 +46,55 @@ const Header: React.FC = () => {
             </Link>
           </div>
           
-          <Navigation />
+          <div className="hidden md:block">
+            <Navigation />
+          </div>
           
-          <Link to="/contact">
+          <Link to="/contact" className="hidden md:block">
             <Button variant="primary" size="md">
               Reserve Table
             </Button>
           </Link>
           
-          <button className="md:hidden text-gray-600 hover:text-amber-700">
+          <button
+            className="md:hidden text-gray-600 hover:text-amber-700"
+            onClick={() => setMobileNavOpen(true)}
+            aria-label="Open navigation menu"
+          >
             <Icon name="fa-bars" size="xl" />
           </button>
         </div>
       </div>
+      {/* Mobile Nav Overlay */}
+      {mobileNavOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex flex-col">
+          <div className="bg-white shadow-lg p-6 flex flex-col gap-6 w-4/5 max-w-xs h-full">
+            <div className="flex justify-between items-center mb-6">
+              <span className="text-2xl font-serif font-bold text-amber-800">SAVEUR</span>
+              <button
+                onClick={() => setMobileNavOpen(false)}
+                className="text-gray-600 hover:text-amber-700"
+                aria-label="Close navigation menu"
+              >
+                <Icon name="fa-times" size="xl" />
+              </button>
+            </div>
+            <Navigation />
+            <Link to="/contact" onClick={() => setMobileNavOpen(false)}>
+              <Button variant="primary" size="md" className="w-full">
+                Reserve Table
+              </Button>
+            </Link>
+            <div className="mt-auto pt-8">
+              <SocialLinks />
+            </div>
+          </div>
+          {/* Click outside to close */}
+          <div className="flex-1" onClick={() => setMobileNavOpen(false)} />
+        </div>
+      )}
     </header>
   );
 };
 
-export default Header; 
+export default Header;
