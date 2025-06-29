@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import HeroSlide from './hero/HeroSlide';
 import SlideIndicators from './hero/SlideIndicators';
-import ReservationWidget from './reservation/ReservationWidget';
 
 interface HeroSlideData {
   id: number;
