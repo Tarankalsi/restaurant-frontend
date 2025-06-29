@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeroSlide from './hero/HeroSlide';
 import SlideIndicators from './hero/SlideIndicators';
+import ReservationWidget from './reservation/ReservationWidget';
 
 interface HeroSlideData {
   id: number;
@@ -14,6 +15,14 @@ const HeroSection: React.FC = () => {
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
   const [guests, setGuests] = useState<string>("2");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prevSlide) => (prevSlide + 1) % heroSlides.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   const handleSlideChange = (index: number) => {
     setActiveSlide(index);
@@ -44,7 +53,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[900px] md:h-[600px] overflow-hidden">
       {heroSlides.map((slide, index) => (
         <HeroSlide
           key={slide.id}
@@ -52,22 +61,26 @@ const HeroSection: React.FC = () => {
           title={slide.title}
           description={slide.description}
           isActive={index === activeSlide}
-          date={date}
-          setDate={setDate}
-          time={time}
-          setTime={setTime}
-          guests={guests}
-          setGuests={setGuests}
         />
       ))}
+       <ReservationWidget
+        date={date}
+        setDate={setDate}
+        time={time}
+        setTime={setTime}
+        guests={guests}
+        setGuests={setGuests}
+      />
 
       <SlideIndicators
         totalSlides={heroSlides.length}
         activeSlide={activeSlide}
         onSlideChange={handleSlideChange}
       />
+
+     
     </section>
   );
 };
 
-export default HeroSection; 
+export default HeroSection;
