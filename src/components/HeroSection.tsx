@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative h-[600px] overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {heroSlides.map((slide, index) => (
         <HeroSlide
           key={slide.id}
@@ -53,6 +53,12 @@ const HeroSection: React.FC = () => {
           title={slide.title}
           description={slide.description}
           isActive={index === activeSlide}
+          date={date}
+          setDate={setDate}
+          time={time}
+          setTime={setTime}
+          guests={guests}
+          setGuests={setGuests}
         />
       ))}
 
@@ -60,15 +66,6 @@ const HeroSection: React.FC = () => {
         totalSlides={heroSlides.length}
         activeSlide={activeSlide}
         onSlideChange={handleSlideChange}
-      />
-
-      <ReservationWidget
-        date={date}
-        setDate={setDate}
-        time={time}
-        setTime={setTime}
-        guests={guests}
-        setGuests={setGuests}
       />
     </section>
   );

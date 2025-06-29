@@ -20,7 +20,7 @@ const ReservationWidget: React.FC<ReservationWidgetProps> = ({
   setGuests,
 }) => {
   return (
-    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-4 md:mr-16 w-80">
+    <div className="w-full lg:w-80">
       <Card padding="lg" shadow="lg">
         <h3 className="text-xl font-bold text-gray-900 mb-4">
           Make a Reservation
